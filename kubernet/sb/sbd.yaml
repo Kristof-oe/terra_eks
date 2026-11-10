@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sb
+  namespace: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: serviceB
+  template:
+    metadata:
+      labels:
+        app: serviceB
+    spec:
+      containers:
+      - name: sb
+        # image:  ${ecr_image_url}
+        image: 362099375729.dkr.ecr.eu-central-1.amazonaws.com/sb:c53d4930fb02ecbc84d68d215f81e7befad44d44
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sa
+  namespace: app
+spec:
+  type: ClusterIP
+  selector:
+    app: serviceA
+  ports:
+  - port: 8080
+    targetPort: 8080
