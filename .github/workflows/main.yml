@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v4
 
       - name: Init
 
@@ -32,7 +31,7 @@ jobs:
       - run: echo ${{ steps.plan.outputs.exitcode}}
 
       - name: Apply
-        run: terraform apply 
+        run: terraform apply
 
       - name: Manifest
         run: kubectl apply -R -f kubernet/
