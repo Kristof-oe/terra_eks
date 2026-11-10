@@ -44,6 +44,7 @@ jobs:
 
       - name: GetPods
         run: |
+          sleep 10
           kubectl get pods -n app 
 
       
