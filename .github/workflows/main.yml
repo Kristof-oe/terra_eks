@@ -46,6 +46,6 @@ jobs:
 
       - name: GetPods
         run: |
-          kubectl get pods -n app
+          kubectl get pods -n app 
 
       
