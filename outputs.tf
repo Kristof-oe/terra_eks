@@ -12,3 +12,7 @@ output "config_repo" {
 #   value = [ for i in ["sa", "sb"] : 
 #   format("curl http://%s/api/%s", module.eks.dns_load, i )]
 # }
+
+output "configure" {
+  value = format("aws eks update-kubeconfig --region %s --name %s", var.region, var.eks_cluster.name)
+}
