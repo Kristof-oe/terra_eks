@@ -8,7 +8,7 @@ terraform {
     }
     kubernes = {
         source = "hashicorp/kubernetes"
-        version = ">=5.85"
+        version = "~>3.0"
     }
     kubectl = { 
         source = "gavinbunney/kubectl"

@@ -16,27 +16,33 @@ jobs:
         with:
           terraform_version: "1.15.0"
 
+      - name: Configure
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          aws-region: eu-cental-1
+
+
       - name: Init
         run: terraform init -backend-config="state.config"
 
       - name: Validate
-        id: validate
         run: terraform validate
 
-      - run: echo ${{ steps.validate.outputs.stdout}}
-      - run: echo ${{ steps.validate.outputs.sterr}}
-      - run: echo ${{ steps.validate.outputs.exitcode}}
-
       - name: Plan
-        id: plan
-        run: terraform plan
-
-      - run: echo ${{ steps.plan.outputs.stdout}}
-      - run: echo ${{ steps.plan.outputs.sterr}}
-      - run: echo ${{ steps.plan.outputs.exitcode}}
+        run: terraform plan -out=tfplan
 
       - name: Apply
-        run: terraform apply
+        run: terraform apply tfplan
 
       - name: Manifest
-        run: kubectl apply -R -f kubernet/
+        run: |
+          kubectl apply -f kubernet/namespace/
+          kubectl apply -R -f kubernet/
+
+      - name: GetPods
+        run: |
+          kubectl get pods -n app
+
+      
