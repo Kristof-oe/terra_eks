@@ -38,6 +38,7 @@ jobs:
 
       - name: Manifest
         run: |
+          aws eks update-kubeconfig --region eu-central-1 --name eks_task
           kubectl apply -f kubernet/namespace/
           kubectl apply -R -f kubernet/
 
