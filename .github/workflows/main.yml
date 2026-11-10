@@ -8,11 +8,11 @@ jobs:
   Terraform:
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v4
 
       - name: Init
-        uses: actions/setup-terraform@v4
+
         run: terraform init -backend-config="state.config"
 
       - name: Validate
