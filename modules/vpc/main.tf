@@ -36,8 +36,9 @@ resource "aws_subnet" "this" {
   tags = merge({
     Project = var.project_name
     Name    = "${var.project_name}-${each.value.type}-subnet${each.key}"
+    # "kubernetes.io/cluster${var.eks_cluster_name}" = "shared"
     },
-    each.value.type == "public" ? { "kubernetes.io/role/elb" = "1" } : {}
+    each.value.type == "public" ? { "kubernetes.io/role/elb" = "1" } : { "kubernetes.io/role/internal-elb" = "1" }
   )
 }
 

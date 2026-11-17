@@ -8,6 +8,7 @@ module "vpc" {
   cidr_block   = var.vpc.cidr_block
   NAT_subnet   = var.vpc.NAT_subnet
   subnets      = var.vpc.subnets
+  eks_cluster_name = module.eks.eks_cluster_name
 
   tags = var.vpc.tags
 
